@@ -4,7 +4,8 @@ from pathlib import Path
 import fitz
 from mcp.server.fastmcp.utilities.types import Image
 
-from config import DATA_DIR, uuid4_pdf_re
+from config import uuid4_pdf_re
+from config_manager import config_manager
 
 logger = logging.getLogger(__name__)
 
@@ -14,10 +15,10 @@ async def display_page_as_image(name: str, page_number: int = 1):
     """
 
     if not uuid4_pdf_re.match(name):
-        logger.error("Input file must be in the 'data' folder and have a .pdf extension.")
+        logger.error(f"Input file '{name}' must be in the '{config_manager.data_dir}' folder and have a .pdf or .PDF extension.")
         return False
 
-    path = Path(DATA_DIR, name)
+    path = Path(config_manager.data_dir, name)
 
     logger.info(f"Displaying page {page_number} from path {path}")
     try:

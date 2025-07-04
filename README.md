@@ -3,6 +3,7 @@
 [![smithery badge](https://smithery.ai/badge/@danielkennedy1/pdf-tools-mcp)](https://smithery.ai/server/@danielkennedy1/pdf-tools-mcp)
 
 A comprehensive set of PDF manipulation tools built with the Model Context Protocol (MCP) framework.
+This forked version of the original gets access to one data directory, similar to the Filesystem MCP, and can read and manipulate all files in there.
 
 ## Features
 
@@ -10,7 +11,7 @@ A comprehensive set of PDF manipulation tools built with the Model Context Proto
 - **Display**: Render PDF pages as images
 - **Merge**: Combine multiple pages into a single long page
 - **Metadata**: Extract document metadata
-- **Text**: Extract text blocks and detailed text information
+- **Text**: Extract text blocks and detailed text information, or even all text in a PDF
 - **Snippets**: Create freeform or full-width snippets from PDF pages
 - **Fuse**: Combine pages from multiple documents into a single document
 
@@ -35,6 +36,8 @@ git clone https://github.com/yourusername/pdf-tools-mcp.git
 cd pdf-tools-mcp
 
 # Install dependencies
+uv venv
+source .venv/bin/activate
 uv pip install -e .
 ```
 
@@ -43,7 +46,16 @@ uv pip install -e .
 Start the MCP server:
 
 ```bash
-python -m src.main
+startServer.sh --data-dir /Users/me/Agents/files
+```
+
+Configuration for Claude Desktop:
+```claude_desktop_config.json
+    "pdf-tools-mcp": {
+      "command": "/Users/me/Agents/servers/pdf-tools-mcp/startServer.sh",
+      "args": ["--data-dir", "/Users/me/Agents/files"],
+      "cwd": "/Users/me/Agents/servers/pdf-tools-mcp"
+    } 
 ```
 
 The server provides PDF manipulation endpoints through the MCP protocol.
@@ -52,7 +64,6 @@ The server provides PDF manipulation endpoints through the MCP protocol.
 
 - Python 3.12+ required
 - Uses the MCP framework for tool registration
-- PDF documents are stored with UUID4 filenames for security
 
 ```bash
 # Update dependencies

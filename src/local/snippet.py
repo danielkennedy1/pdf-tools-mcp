@@ -4,7 +4,8 @@ from pathlib import Path
 from typing import Tuple
 import uuid
 
-from config import DATA_DIR, uuid4_pdf_re
+from config import uuid4_pdf_re
+from config_manager import config_manager
 
 logger = logging.getLogger(__name__)
 
@@ -27,12 +28,10 @@ async def create_free_snippet(file_name: str, clip_rect: Tuple[float, float, flo
     """
 
     if not uuid4_pdf_re.match(file_name):
-        logger.error(
-            "Input file must be in the 'data' folder and have a .pdf extension."
-        )
+        logger.error(f"Input file '{file_name}' must be in the '{config_manager.data_dir}' folder and have a .pdf or .PDF extension.")
         return False
 
-    file_path = Path(DATA_DIR, file_name)
+    file_path = Path(config_manager.data_dir, file_name)
 
     document = fitz.open(file_path)
 
@@ -49,7 +48,7 @@ async def create_free_snippet(file_name: str, clip_rect: Tuple[float, float, flo
 
     snippet_file_name = f"snippet_{snippet_uuid}.pdf"
 
-    snippet_file_path = Path(DATA_DIR, snippet_file_name)
+    snippet_file_path = Path(config_manager.data_dir, snippet_file_name)
 
     snippet = create_snippet(page, fitz.Rect(clip_rect))
 
@@ -72,12 +71,10 @@ async def create_full_width_snippet(file_name: str, clip_rect: Tuple[float, floa
     """
 
     if not uuid4_pdf_re.match(file_name):
-        logger.error(
-            "Input file must be in the 'data' folder and have a .pdf extension."
-        )
+        logger.error(f"Input file '{file_name}' must be in the '{config_manager.data_dir}' folder and have a .pdf or .PDF extension.")
         return False
 
-    file_path = Path(DATA_DIR, file_name)
+    file_path = Path(config_manager.data_dir, file_name)
 
     document = fitz.open(file_path)
 
@@ -94,7 +91,7 @@ async def create_full_width_snippet(file_name: str, clip_rect: Tuple[float, floa
 
     snippet_file_name = f"snippet_{snippet_uuid}.pdf"
 
-    snippet_file_path = Path(DATA_DIR, snippet_file_name)
+    snippet_file_path = Path(config_manager.data_dir, snippet_file_name)
 
     snippet = create_snippet(page, fitz.Rect(0, clip_rect[0], page.bound().width, clip_rect[1]))
 

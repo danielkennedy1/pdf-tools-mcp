@@ -2,7 +2,8 @@ import fitz
 import logging
 from pathlib import Path
 
-from config import uuid4_pdf_re, DATA_DIR
+from config import uuid4_pdf_re
+from config_manager import config_manager
 
 logger = logging.getLogger(__name__)
 
@@ -12,10 +13,10 @@ def merge_pages(input_file_name: str):
     """
 
     if not uuid4_pdf_re.match(input_file_name):
-        logger.error("Input file must be in the 'data' folder and have a .pdf extension.")
+        logger.error(f"Input file '{input_file_name}' must be in the '{config_manager.data_dir}' folder and have a .pdf or .PDF extension.")
         return False
 
-    input_file = Path(DATA_DIR, input_file_name)
+    input_file = Path(config_manager.data_dir, input_file_name)
 
     src = fitz.open(input_file.as_posix())
     doc = fitz.open()

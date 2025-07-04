@@ -4,7 +4,8 @@ import uuid
 import logging
 from pathlib import Path
 
-from config import DATA_DIR, uuid4_pdf_re
+from config import uuid4_pdf_re
+from config_manager import config_manager
 
 logger = logging.getLogger(__name__)
 
@@ -25,7 +26,10 @@ async def fuse_documents(document_names: List[str], page_numbers: List[int]):
     pages = []
 
     for doc_name, page_num in zip(document_names, page_numbers):
-        doc = fitz.open(Path(DATA_DIR, doc_name))
+        if not uuid4_pdf_re.match(doc_name):
+            logger.error(f"Input file '{doc_name}' must be in the '{config_manager.data_dir}' folder and have a .pdf or .PDF extension.")
+            return False
+        doc = fitz.open(Path(config_manager.data_dir, doc_name))
         
         pages.append(doc[page_num - 1])
 
@@ -43,7 +47,7 @@ async def fuse_documents(document_names: List[str], page_numbers: List[int]):
     
     fused_doc_name = f"fused_{uuid.uuid4()}.pdf"
 
-    fused_document.save(Path(DATA_DIR, fused_doc_name))
+    fused_document.save(Path(config_manager.data_dir, fused_doc_name))
 
     fused_document.close()
 

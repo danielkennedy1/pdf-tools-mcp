@@ -3,7 +3,7 @@ import aiofiles
 import os
 import uuid
 
-from config import DATA_DIR
+from config_manager import config_manager
 
 async def download_pdf(url):
     """
@@ -12,7 +12,7 @@ async def download_pdf(url):
 
     file_name = uuid.uuid4()
 
-    save_path = os.path.join(os.getcwd(), DATA_DIR, f"{file_name}.pdf")
+    save_path = os.path.join(os.getcwd(), config_manager.data_dir, f"{file_name}.pdf")
 
     try:
         # Make an asynchronous request to the URL
