@@ -1,4 +1,5 @@
 # PDF Tools MCP
+[![Trust Score](https://archestra.ai/mcp-catalog/api/badge/quality/danielkennedy1/pdf-tools-mcp)](https://archestra.ai/mcp-catalog/danielkennedy1__pdf-tools-mcp)
 
 [![smithery badge](https://smithery.ai/badge/@danielkennedy1/pdf-tools-mcp)](https://smithery.ai/server/@danielkennedy1/pdf-tools-mcp)
 
