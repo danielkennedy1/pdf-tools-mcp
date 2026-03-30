@@ -18,6 +18,10 @@ A comprehensive set of PDF manipulation tools built with the Model Context Proto
 - **Display**: Render remote PDF pages as images
 - **Download**: Fetch PDFs from URLs to local storage
 
+## Hosted deployment
+
+A hosted deployment is available on [Fronteir AI](https://fronteir.ai/mcp/danielkennedy1-pdf-tools-mcp).
+
 ## Installation
 
 ### Installing via Smithery
