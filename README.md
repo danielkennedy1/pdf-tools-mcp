@@ -1,6 +1,6 @@
 # PDF Tools MCP
 
-[![smithery badge](https://smithery.ai/badge/@danielkennedy1/pdf-tools-mcp)](https://smithery.ai/server/@danielkennedy1/pdf-tools-mcp)
+[![Listed on LightNow](https://lightnow.ai/badge/io.github.danielkennedy1/pdf-tools-mcp?variant=listed)](https://lightnow.ai/servers/io.github.danielkennedy1/pdf-tools-mcp)
 
 A comprehensive set of PDF manipulation tools built with the Model Context Protocol (MCP) framework.
 
